@@ -1,0 +1,46 @@
+{
+  "name": "@js-lion/template",
+  "private": false,
+  "version": "0.0.1",
+  "description": "简易的字符串替换工具",
+  "main": "./dist/template.js",
+  "module": "./dist/template.js",
+  "exports": {
+    "import": "./dist/template.js",
+    "umd": "./dist/template.umd.cjs",
+    "require": "./dist/template.umd.cjs"
+  },
+  "type": "module",
+  "types": "types/index.d.ts",
+  "license": "MIT",
+  "homepage": "https://github.com/js-lion/api#readme",
+  "author": {
+    "name": "svon",
+    "email": "svon.me@gmail.com",
+    "url": "https://github.com/js-lion/template"
+  },
+  "scripts": {
+    "build": "vite build",
+    "postbuild": "npm run types",
+    "types": "tsc --declaration --noEmit false --emitDeclarationOnly --resolveJsonModule true --esModuleInterop --declarationDir ./types ./src/template"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/js-lion/template.git"
+  },
+  "keywords": [
+    "template"
+  ],
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9"
+  },
+  "files": [
+    "dist/",
+    "src/",
+    "types/",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ]
+}

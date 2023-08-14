@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "target": "ES6",
+    "declaration": true,
+    "composite": true,
+    "useDefineForClassFields": true,
+    "module": "ES6",
+    "moduleResolution": "Node",
+    "strict": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "src/*": ["./src/*"],
+      "test/*": ["./test/*"],
+      "types/*": ["./types/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": ["node_modules"]
+}
