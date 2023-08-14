@@ -31,12 +31,15 @@ export var Template = function(regExp: RegExp, text: string) {
   return function<T = object>(replace: T | Replace): string {
     regExp.lastIndex = 0;
     return text.replace(regExp, function($1: string, $2: string): string {
-      if (typeof replace === "function") {
+      if (replace && typeof replace === "function") {
         // @ts-ignore
         return replace($1, $2);
       }
-      // @ts-ignore
-      return replace[$2];
+      if (replace) {
+        // @ts-ignore
+        return replace[$2];
+      }
+      return $2;
     });
   }
 };
