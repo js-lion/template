@@ -14,11 +14,7 @@ export default defineConfig({
     sourcemap: true,
     manifest: false,
     rollupOptions: {
-      external: [
-        "axios", 
-        "lodash-es",
-        "reflect-metadata"
-      ],
+      external: [],
       output: {
         inlineDynamicImports: true
       }

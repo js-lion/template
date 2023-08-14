@@ -1,7 +1,7 @@
 {
   "name": "@js-lion/template",
   "private": false,
-  "version": "0.0.3",
+  "version": "0.1",
   "description": "简易的字符串替换工具",
   "main": "./dist/template.js",
   "module": "./dist/template.js",
