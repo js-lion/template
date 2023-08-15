@@ -21,20 +21,56 @@ export var regExpB = function() {
   return /\/:([\w-]+)/ig;
 }
 
+var isNil = function(value: any): boolean {
+  if (typeof value === "boolean") {
+    return value ? true : false;
+  }
+  return value == null;
+}
+
+var isNumber = function(value: string | number) {
+  if (value === 0 || typeof value === "number") {
+    return true;
+  }
+  return false;
+}
+
+var isString = function(value: string | number) {
+  if (value || typeof value === "string") {
+    return true;
+  }
+  return false;
+}
+
+var toString = function(value: string | number) {
+  if(isNumber(value) || isString(value)) {
+    return String(value);
+  }
+}
+
 var Callback = function(value: object | Replace) {
-  return function($1: string, $2: string): string {
+  return function($1: string, $2: string) {
     if (value && typeof value === "function") {
       // @ts-ignore
       return value($1, $2);
     }
-    if (value) {
+    if (value && typeof value === "object") {
       // @ts-ignore
-      var data = value[$2];
-      if(data || data === 0) {
+      var data = toString(value[$2]);
+      if (!isNil(data)) {
         return data;
       }
     }
-    return $2;
+    if (Array.isArray(value) && value.length > 0) {
+      if (/^\d+$/.test($2)) {
+        var index = Number($2);
+        var data = toString(value[index]);
+        if (!isNil(data)) {
+          return data;
+        }
+      }
+    }
+    return "";
   }
 }
 
@@ -79,9 +115,9 @@ export var template = function(text: string, replace: object | Replace) {
   var callback = Callback(replace);
   return tplB(function($1: string, $2: string) {
     var value = callback($1, $2);
-    if (value && typeof value === "string" && /^https?:|^\//i.test(value)) {
+    if (value && /^https?:|^\//i.test(value)) {
       return value;
     }
-    return "/" + value;
+    return "/" + (toString(value) || "");
   });
 };
